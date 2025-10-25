@@ -25,7 +25,7 @@ my-api/
 This template demonstrates how to implement and deploy a Chainlink External Adapter. It includes:
 - A sample smart contract
 - A job spec configuration
-- A Dockerized server for the adapter
+- A Dockerized server for the external adapter
 ---
 
 ## Request Structure

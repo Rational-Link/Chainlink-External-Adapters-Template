@@ -26,7 +26,7 @@ const app: Express = express();
 app.use(bodyParser.json());
 
 app.get("/", function (req: Request, res: Response) {
-  res.send("Hello World!");
+  res.send("Hello, Thank you for using this Chainlink External Adapter Template from Rational Link!");
 });
 
 app.post("/", async function (req: Request<{}, {}, EAInput>, res: Response) {

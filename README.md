@@ -1,5 +1,18 @@
 # DATA STRUCTURES
 
+
+```
+my-api/
+├── src/
+│   └── index.ts         # Your Express or serverless handler
+├── package.json
+├── tsconfig.json
+├── Dockerfile
+```
+
+
+
+
 ```
 Request data received:  {
   data: { infoType: 'trivia', number: '9' },

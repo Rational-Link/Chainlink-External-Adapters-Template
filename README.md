@@ -15,10 +15,16 @@ my-api/
 ├── tsconfig.json
 └── README.md
 ```
+---
 
+## Overview
+- Example Solidity contracts for requesting and consuming external data.
+- Sample TOML job descriptions to illustrate oracle job configuration.
+- References to oracle contract addresses and job IDs for supported test networks.
 
+---
 
-
+## Request Structure
 ```
 Request data received:  {
   data: { infoType: 'trivia', number: '9' },
@@ -53,3 +59,11 @@ returned response:   {
   }
 }
 ```
+---
+
+## Thsi process will be run in a docker container via on the Node operator side which would allow the Job specs to pick up during each run
+    ```bash
+    docker compose up
+    ```
+
+---

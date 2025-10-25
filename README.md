@@ -10,9 +10,9 @@ my-api/
 ├── job/
 │   └── numbers-ea.toml     # Chainlink Node Job spec
 ├── docker/
-│   └── Dockerfile          # The docker image
+│   └── Dockerfile          # Docker image
 ├── src/
-│   └── server.ts           # The External Adapter server
+│   └── server.ts           # External Adapter server
 ├── docker-compose.yml
 ├── package-lock.json
 ├── package.json
@@ -57,8 +57,8 @@ The adapter returns a structured JSON response:
 The adapter runs inside a Docker container on the Chainlink Node operator's infrastructure. This setup ensures the job specs can trigger the adapter reliably during each execution cycle.
 To start the container locally:
 
-    ```bash
-    docker compose up
-    ```
+```bash
+  docker compose up
+```
 
 ---

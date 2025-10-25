@@ -1,10 +1,14 @@
 # Chainlink Node External Adapters Template
-This guide outlines how an external adapter is created and how you (client) will modify the logic accoridngly. The logic once agreed upon, will be run continuously and installed via Chainlink Node bridge name specific to your account.
+This guide provides a clear overview of how to build and customize an External Adapter for Chainlink. As a client, you'll tailor the adapter logic to meet your specific data needs. Once finalized, the adapter will be deployed and continuously executed via docker,and the Chainlink Node will implement a bridge specific to your account & job requirement.
 
 
 ## Repository Structure
 ```
 my-api/
+├── contract/
+│   └── ClientContract.sol
+├── job/
+│   └── numbers-ea.toml
 ├── docker/
 │   └── Dockerfile
 ├── src/
@@ -18,50 +22,41 @@ my-api/
 ---
 
 ## Overview
-- Example Solidity contracts for requesting and consuming external data.
-- Sample TOML job descriptions to illustrate oracle job configuration.
-- References to oracle contract addresses and job IDs for supported test networks.
-
+This template demonstrates how to implement and deploy a Chainlink External Adapter. It includes:
+- A sample smart contract
+- A job spec configuration
+- A Dockerized server for the adapter
 ---
 
 ## Request Structure
-```
-Request data received:  {
-  data: { infoType: 'trivia', number: '9' },
-  id: '0x93fd920063d2462d8dce013a7fc75656',
-  meta: {
-    oracleRequest: {
-      callbackAddr: '0x10A47Df8C98DC1fB0Ce53532c1bC63B9C2149104',
-      callbackFunctionId: '0x7642d375',
-      cancelExpiration: '1665455196',
-      data: '0x666e756d626572613968696e666f5479706566747269766961',
-      dataVersion: '1',
-      payment: '1000000000000000000',
-      requestId: '0x6974082159eba12e5d65745eea32e76c7f2be31d0bb18b04ff15b3884029beda',
-      requester: '0x10A47Df8C98DC1fB0Ce53532c1bC63B9C2149104',
-      specId: '0x3933666439323030363364323436326438646365303133613766633735363536'
-    }
-  }
-}
-returned response:   {
-  jobRunId: '0x93fd920063d2462d8dce013a7fc75656',
-  statusCode: 200,
-  data: {
-    result: "9 is the number of circles of Hell in Dante's Divine Comedy."
-  }
-}
- Request data received:  { id: 10, data: { number: 'random', infoType: 'trivia' } }
-returned response:   {
-  jobRunId: 10,
-  statusCode: 200,
-  data: {
-    result: '11 is the number of players on a soccer team on the field at a time as well as in a cricket team.'
+The External Adapter expects a JSON payload with the following format:
+```json
+{
+  "id": "12345",
+  "data": {
+    "number": "42",
+    "infoType": "trivia"
   }
 }
 ```
 ---
+## Response Structure
+The adapter returns a structured JSON response:
+```json
+{
+  "jobRunId": "12345",
+  "statusCode": 200,
+  "data": {
+    "result": "42 is the answer to life, the universe, and everything."
+  }
+}
+```
 
-## Thsi process will be run in a docker container via on the Node operator side which would allow the Job specs to pick up during each run
+---
+## Running the Adapter
+The adapter runs inside a Docker container on the Chainlink Node operator's infrastructure. This setup ensures the job specs can trigger the adapter reliably during each execution cycle.
+To start the container locally:
+
     ```bash
     docker compose up
     ```

@@ -1,13 +1,19 @@
-# DATA STRUCTURES
+# Chainlink Node External Adapters Template
+This guide outlines how an external adapter is created and how you (client) will modify the logic accoridngly. The logic once agreed upon, will be run continuously and installed via Chainlink Node bridge name specific to your account.
 
 
+## Repository Structure
 ```
 my-api/
+├── docker/
+│   └── Dockerfile
 ├── src/
-│   └── index.ts         # Your Express or serverless handler
+│   └── server.ts         # The External Adapter server
+├── docker-compose.yml
+├── package-lock.json
 ├── package.json
 ├── tsconfig.json
-├── Dockerfile
+└── README.md
 ```
 
 

@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  adapter:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: chainlink-external-adapter:local
+    container_name: chainlink-adapter
+    ports:
+      - "8080:8080"
+    restart: unless-stopped

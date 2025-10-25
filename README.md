@@ -6,13 +6,13 @@ This guide provides a clear overview of how to build and customize an External A
 ```
 my-api/
 ├── contract/
-│   └── ClientContract.sol
+│   └── ClientContract.sol  # Client request
 ├── job/
-│   └── numbers-ea.toml
+│   └── numbers-ea.toml     # Chainlink Node Job spec
 ├── docker/
-│   └── Dockerfile
+│   └── Dockerfile          # The docker image
 ├── src/
-│   └── server.ts         # The External Adapter server
+│   └── server.ts           # The External Adapter server
 ├── docker-compose.yml
 ├── package-lock.json
 ├── package.json
@@ -47,7 +47,7 @@ The adapter returns a structured JSON response:
   "jobRunId": "12345",
   "statusCode": 200,
   "data": {
-    "result": "42 is the answer to life, the universe, and everything."
+    "result": "42 is the answer to life, the universe, and everything." #Woohoo!
   }
 }
 ```

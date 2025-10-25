@@ -6,8 +6,9 @@ import axios from "axios";
 type EAInput = {
   id: number | string;
   data: {
-    number: number | string;
-    infoType: string;
+    // Accept the article title and optional number of characters for extracts
+    titles: string;
+    exchars?: number;  // Made optional with ?
   };
 };
 
@@ -26,15 +27,40 @@ const app: Express = express();
 app.use(bodyParser.json());
 
 app.get("/", function (req: Request, res: Response) {
-  res.send("Hello, Thank you for using this Chainlink External Adapter Template from Rational Link!");
+  res.send("Hello! Thank you for using this External Adapter template. - Rational Link");
 });
 
 app.post("/", async function (req: Request<{}, {}, EAInput>, res: Response) {
   const eaInputData: EAInput = req.body;
   console.log(" Request data received: ", eaInputData);
 
-  // Build API Request
-  const url = `http://numbersapi.com/${eaInputData.data.number}/${eaInputData.data.infoType}`;
+  // Build MediaWiki API request with the provided titles and optional exchars
+  const titles = eaInputData.data.titles;
+  const exchars = eaInputData.data.exchars;
+
+  const params = new URLSearchParams({
+    action: "query",
+    format: "json",
+    prop: "extracts",
+    exintro: "true",
+    explaintext: "true",
+    titles: titles,
+  });
+
+  if (typeof exchars === 'number') {
+    // Ensure exchars is a positive integer
+    const excharsInt = Math.trunc(exchars);
+    if (excharsInt > 0) {
+      params.set("exchars", String(excharsInt));
+    }
+  }
+
+  const url = `https://en.wikipedia.org/w/api.php?${params.toString()}`;
+  // Debug logging to help verify incoming payload and constructed query
+  // console.log("Parsed request fields -> titles:", titles, "exchars:", exchars);
+  // console.log("Constructed MediaWiki API URL:", url);
+
+
 
   let eaResponse: EAOutput = {
     data: {},
@@ -44,9 +70,13 @@ app.post("/", async function (req: Request<{}, {}, EAInput>, res: Response) {
 
   try {
     const apiResponse = await axios.get(url);
+    
+    // Extract just the page extract from the MediaWiki API response
+    const pages = apiResponse.data.query?.pages || {};
+    const firstPageId = Object.keys(pages)[0];
+    const extract = firstPageId ? pages[firstPageId].extract : null;
 
-    // It's common practice to store the desired result value in a top-level result field.
-    eaResponse.data = { result: apiResponse.data };
+    eaResponse.data = { result: extract };
     eaResponse.statusCode = apiResponse.status;
 
     res.json(eaResponse);
@@ -70,3 +100,4 @@ process.on("SIGINT", () => {
   console.info("\nShutting down server...");
   process.exit(0);
 });
+

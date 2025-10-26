@@ -1,17 +1,4 @@
 // SPDX-License-Identifier: MIT
-
-/**
- * Example Contract
- *
- * This contract is provided for demonstration purposes only.
- * - It uses hardcoded values for simplicity and clarity.
- * - The code has not been audited or security‑reviewed.
- *
- * Important:
- * Do NOT deploy this contract to production or use it with real funds.
- * It is intended solely as an educational reference.
- */
-
 pragma solidity ^0.8.19;
 
 import {Chainlink, ChainlinkClient} from "@chainlink/contracts/src/v0.8/operatorforwarder/ChainlinkClient.sol";
@@ -21,40 +8,35 @@ import {LinkTokenInterface} from "@chainlink/contracts/src/v0.8/shared/interface
 contract ConsumerContract is ChainlinkClient, ConfirmedOwner {
     using Chainlink for Chainlink.Request;
 
-    uint256 private constant ORACLE_PAYMENT = (0 * LINK_DIVISIBILITY) / 10; // 1 * 10**18
+    uint256 private constant ORACLE_PAYMENT = (1 * LINK_DIVISIBILITY) / 10; // 0.1 LINK
+    bytes32 private externalJobId;
     string public lastRetrievedInfo;
 
-    event RequestForInfoFulfilled(
-        bytes32 indexed requestId,
-        string indexed response
-    );
+    event RequestForInfoFulfilled(bytes32 indexed requestId, string indexed response);
 
-    /**
-     *@dev LINK address in Ethereum sepolia network: 0x779877A7B0D9E8603169DdbD7836e478b4624789
-     * @dev Check https://docs.chain.link/docs/link-token-contracts/ for LINK address for the right network
-     */
     constructor() ConfirmedOwner(msg.sender) {
-        _setChainlinkToken(0x779877A7B0D9E8603169DdbD7836e478b4624789);
-        _setChainlinkOracle(0x52Ee9d274b3059575672389C372C03D97Ab71D2a);
-        externalJobId = "93fd920063d2462d8dce013a7fc75656";  }
-
+        _setChainlinkToken(0x779877A7B0D9E8603169DdbD7836e478b4624789); // Sepolia LINK
+        _setChainlinkOracle(0x52Ee9d274b3059575672389C372C03D97Ab71D2a); // Replace with active oracle
+        externalJobId = "9b12d1e1cc6645e09a50c1c30bda7171"; // Verify job ID
     }
+
 
     function requestInfo(
         address _oracle,
         string memory _jobId,
-        string memory number,
-        string memory infoType
+        uint256 exchars,  // Changed from string to uint256
+        string memory titles
     ) public onlyOwner {
-        Chainlink.Request memory req = buildOperatorRequest(
+        Chainlink.Request memory req = _buildOperatorRequest(
             stringToBytes32(_jobId),
             this.fulfillRequestInfo.selector
         );
-
-        req.add("number", number);
-        req.add("infoType", infoType);
-        sendOperatorRequestTo(_oracle, req, ORACLE_PAYMENT);
+        req._add("titles", titles);
+        // Encode the uint256 as bytes for the Chainlink request
+        req._add("exchars", abi.encode(exchars));
+        _sendOperatorRequestTo(_oracle, req, ORACLE_PAYMENT);
     }
+
 
     function fulfillRequestInfo(bytes32 _requestId, string memory _info)
         public
@@ -64,66 +46,35 @@ contract ConsumerContract is ChainlinkClient, ConfirmedOwner {
         lastRetrievedInfo = _info;
     }
 
-    /*
-    ================== UTILITY FUNCTIONS ======================================================================
-    */
-
-    function contractBalances()
-        public
-        view
-        returns (uint256 eth, uint256 link)
-    {
-        eth = address(this).balance;
-
-        LinkTokenInterface linkContract = LinkTokenInterface(
-            chainlinkTokenAddress()
-        );
-        link = linkContract.balanceOf(address(this));
+  function stringToBytes32(
+    string memory source
+  ) private pure returns (bytes32 result) {
+    bytes memory tempEmptyStringTest = bytes(source);
+    if (tempEmptyStringTest.length == 0) {
+      return 0x0;
     }
 
-    function getChainlinkToken() public view returns (address) {
-        return chainlinkTokenAddress();
+    assembly {
+      // solhint-disable-line no-inline-assembly
+      result := mload(add(source, 32))
     }
+  }
 
-    function withdrawLink() public onlyOwner {
-        LinkTokenInterface link = LinkTokenInterface(chainlinkTokenAddress());
-        require(
-            link.transfer(msg.sender, link.balanceOf(address(this))),
-            "Unable to transfer Link"
-        );
+    // Helper function to convert uint256 to string
+function uint256ToString(uint256 value) public pure returns (string memory) {
+    if (value == 0) return "0";
+    uint256 temp = value;
+    uint256 digits;
+    while (temp != 0) {
+        digits++;
+        temp /= 10;
     }
-
-    function withdrawBalance() public onlyOwner {
-        payable(msg.sender).transfer(address(this).balance);
+    bytes memory buffer = new bytes(digits);
+    temp = value;
+    for (uint256 i = digits; i > 0; i--) {
+        buffer[i - 1] = bytes1(uint8(48 + temp % 10));
+        temp /= 10;
     }
-
-    function cancelRequest(
-        bytes32 _requestId,
-        uint256 _payment,
-        bytes4 _callbackFunctionId,
-        uint256 _expiration
-    ) public onlyOwner {
-        cancelChainlinkRequest(
-            _requestId,
-            _payment,
-            _callbackFunctionId,
-            _expiration
-        );
-    }
-
-    function stringToBytes32(string memory source)
-        private
-        pure
-        returns (bytes32 result)
-    {
-        bytes memory tempEmptyStringTest = bytes(source);
-        if (tempEmptyStringTest.length == 0) {
-            return 0x0;
-        }
-
-        assembly {
-            // solhint-disable-line no-inline-assembly
-            result := mload(add(source, 32))
-        }
-    }
+    return string(buffer);
+}
 }

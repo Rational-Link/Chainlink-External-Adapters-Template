@@ -52,8 +52,13 @@ app.post("/", async function (req: Request<{}, {}, EAInput>, res: Response) {
   try {
     const apiResponse = await axios.get(url);
 
-    // It's common practice to store the desired result value in a top-level result field.
-    eaResponse.data = { result: apiResponse.data };
+    // Extract the text content from the Wikipedia API response
+    const pages = apiResponse.data.query?.pages || {};
+    const firstPageId = Object.keys(pages)[0];
+    const extract = firstPageId ? pages[firstPageId].extract : null;
+
+    // Return just the extracted text in the result field
+    eaResponse.data = { result: extract };
     eaResponse.statusCode = apiResponse.status;
 
     res.json(eaResponse);

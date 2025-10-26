@@ -8,7 +8,7 @@ type EAInput = {
   data: {
     // Accept the article title and optional number of characters for extracts
     titles: string;
-    exchars?: number;  // Made optional with ?
+    exchars?: number | string;   
   };
 };
 
@@ -35,27 +35,8 @@ app.post("/", async function (req: Request<{}, {}, EAInput>, res: Response) {
   console.log(" Request data received: ", eaInputData);
 
   // Build MediaWiki API request with the provided titles and optional exchars
-  const titles = eaInputData.data.titles;
-  const exchars = eaInputData.data.exchars;
 
-  const params = new URLSearchParams({
-    action: "query",
-    format: "json",
-    prop: "extracts",
-    exintro: "true",
-    explaintext: "true",
-    titles: titles,
-  });
-
-  if (typeof exchars === 'number') {
-    // Ensure exchars is a positive integer
-    const excharsInt = Math.trunc(exchars);
-    if (excharsInt > 0) {
-      params.set("exchars", String(excharsInt));
-    }
-  }
-
-  const url = `https://en.wikipedia.org/w/api.php?${params.toString()}`;
+  const url = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&titles=${eaInputData.data.titles}&exintro=true&explaintext=true&exchars=${eaInputData.data.exchars}`;
   // Debug logging to help verify incoming payload and constructed query
   // console.log("Parsed request fields -> titles:", titles, "exchars:", exchars);
   // console.log("Constructed MediaWiki API URL:", url);
@@ -70,13 +51,9 @@ app.post("/", async function (req: Request<{}, {}, EAInput>, res: Response) {
 
   try {
     const apiResponse = await axios.get(url);
-    
-    // Extract just the page extract from the MediaWiki API response
-    const pages = apiResponse.data.query?.pages || {};
-    const firstPageId = Object.keys(pages)[0];
-    const extract = firstPageId ? pages[firstPageId].extract : null;
 
-    eaResponse.data = { result: extract };
+    // It's common practice to store the desired result value in a top-level result field.
+    eaResponse.data = { result: apiResponse.data };
     eaResponse.statusCode = apiResponse.status;
 
     res.json(eaResponse);
@@ -100,4 +77,3 @@ process.on("SIGINT", () => {
   console.info("\nShutting down server...");
   process.exit(0);
 });
-

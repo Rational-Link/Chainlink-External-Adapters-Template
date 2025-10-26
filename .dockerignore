@@ -1,0 +1,11 @@
+node_modules
+dist
+src
+Dockerfile*
+.dockerignore
+.git
+.gitignore
+.vscode
+*.log
+tests
+README.md

@@ -7,10 +7,10 @@ This guide provides a clear overview of how to build and customize an External A
 my-api/
 ├── contract/
 │   └── ClientContract.sol  # Client request
-├── job/
-│   └── numbers-ea.toml     # Chainlink Node Job spec
 ├── docker/
 │   └── Dockerfile          # Docker image
+├── job/
+│   └── wiki-ea.toml        # Chainlink Node Job spec
 ├── src/
 │   └── server.ts           # External Adapter server
 ├── docker-compose.yml

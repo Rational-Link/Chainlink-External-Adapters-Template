@@ -57,7 +57,7 @@ Upon successful execution, the adapter returns a structured JSON response contai
 - data.result: Contains the extracted content from the specified Wikipedia article
 
 ---
-## Chainlink bridge in this Example
+## Chainlink Bridge in this Example
 
 In the Chainlink Operator UI, a bridge wil be created like this:
 ![Alt text](./job/snapshot_wiki-bridge.png)

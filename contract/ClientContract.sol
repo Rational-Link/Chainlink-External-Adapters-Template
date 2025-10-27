@@ -15,9 +15,9 @@ contract ConsumerContract is ChainlinkClient, ConfirmedOwner {
     event RequestForInfoFulfilled(bytes32 indexed requestId, string indexed response);
 
     constructor() ConfirmedOwner(msg.sender) {
-        _setChainlinkToken(0x779877A7B0D9E8603169DdbD7836e478b4624789); // Sepolia LINK
-        _setChainlinkOracle(0x52Ee9d274b3059575672389C372C03D97Ab71D2a); // Replace with active oracle
-        externalJobId = "9b12d1e1cc6645e09a50c1c30bda7171"; // Verify job ID
+        _setChainlinkToken(0x779877A7B0D9E8603169DdbD7836e478b4624789);   // Ethereum Sepolia LINK
+        _setChainlinkOracle(0x52Ee9d274b3059575672389C372C03D97Ab71D2a);  // # Oracle contract address per Rational Link 
+        externalJobId = "9b12d1e1cc6645e09a50c1c30bda7171";               // # Job id per Rational Link 
     }
 
 

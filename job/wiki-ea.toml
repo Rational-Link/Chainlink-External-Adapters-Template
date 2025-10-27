@@ -1,10 +1,10 @@
 type = "directrequest"
 schemaVersion = 1
-name = "demo-wiki-bridge"  #  TODO Pick a Job name
-# externalJobID = "9b12d1e1-cc66-45e0-9a50-c1c30bda7171" 
+name = "demo-wiki-bridge"  
+# externalJobID = "9b12d1e1-cc66-45e0-9a50-c1c30bda7171"  # Job id per Rational Link 
 maxTaskDuration = "0s"
-contractAddress = "0x52Ee9d274b3059575672389C372C03D97Ab71D2a"   # TODO Update to your Operator / Oracle contract here and in submit_tx.
-evmChainID = "11155111"
+contractAddress = "0x52Ee9d274b3059575672389C372C03D97Ab71D2a"   # Oracle contract address per Rational Link 
+evmChainID = "11155111" # Ethereum Sepolia
 minContractPaymentLinkJuels = "0"
 observationSource = """
     decode_log   [type=ethabidecodelog
@@ -19,7 +19,7 @@ observationSource = """
     encode_tx    [type=ethabiencode
                   abi="fulfillOracleRequest2(bytes32 requestId, uint256 payment, address callbackAddress, bytes4 callbackFunctionId, uint256 expiration, bytes calldata data)"
                   data="{\\"requestId\\": $(decode_log.requestId), \\"payment\\": $(decode_log.payment), \\"callbackAddress\\": $(decode_log.callbackAddr), \\"callbackFunctionId\\": $(decode_log.callbackFunctionId), \\"expiration\\": $(decode_log.cancelExpiration), \\"data\\": $(encode_data)}"]
-    submit_tx    [type=ethtx to="0x52Ee9d274b3059575672389C372C03D97Ab71D2a" data="$(encode_tx)"]
+    submit_tx    [type=ethtx to="0x52Ee9d274b3059575672389C372C03D97Ab71D2a" data="$(encode_tx)"] # Oracle contract address per Rational Link 
 
     decode_log -> decode_cbor -> fetch -> parse -> encode_data -> encode_tx -> submit_tx
 """

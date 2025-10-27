@@ -56,8 +56,13 @@ Upon successful execution, the adapter returns a structured JSON response contai
 - statusCode: Indicates the success of the request (200 = OK).
 - data.result: Contains the extracted content from the specified Wikipedia article
 
-
 ---
+## Chainlink bridge in this example
 
+In the Chainlink Operator UI, a bridge wil be created like this:
+![Alt text](./job/snapshot_wiki-bridge.png)
+Bridge Configuration
+- Name: wiki-bridge — defined specifically for this example.
+- URL: http://host.docker.internal:8080 — selected based on the Docker-hosted server and the port specified in docker-compose.yml.
+- Outgoing Token: jH7x0qFm5Z... — a signed JSON Web Token automatically included in requests, serving as cryptographic proof that the call originated from a trusted Chainlink node.
 
----

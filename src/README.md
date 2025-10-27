@@ -1,7 +1,7 @@
-# External Adapter Template (Express + TypeScript)
+## External Adapter Template (Express + TypeScript)
 This script provides a simple External Adapter template for Chainlink nodes, built with Express, TypeScript, and Axios. It demonstrates how to receive requests from a Chainlink node, call an external API (in this case, Wikipedia), and return structured results back to the node.
 
-## How It Works
+### How It Works
 1. Startup
   - The server runs on the port defined in PORT (default: 8080).
   - On startup, it listens for incoming HTTP requests.
@@ -46,14 +46,14 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
   }
   ```
 
-## Key Components
+### Key Components
 - Express: Handles HTTP requests and responses.
 - Axios: Makes outbound API calls.
 - TypeScript Types:
   - EAInput: Defines the expected request payload.
-  - EAOutput: Defines the structured response format
+  - EAOutput: Defines the structured response format.
 
-## Tips for Clients
+### Tips for Clients
 - Adapt the API Call:
   Replace the Wikipedia API logic with your own external data source. The structure is already in place for handling requests and returning results.
 - Secure Your Adapter:
@@ -67,7 +67,7 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
 - Logging:
   Debug logs are included. Enhance logging for observability in production environments.
 
-## Running Locally
+### Running Locally
 ```bash
 # Install dependencies
 npm install
@@ -77,13 +77,13 @@ npm run start
 ```
 The adapter will be available at http://localhost:8080.
 
-## Running on Docker
+### Running on Docker
 ```bash
 # Navigate to main directory where docker-compose.yml is located
 docker compose up
 ```
 
-## Example Request
+### Example Request
 ```bash
 curl -X POST http://localhost:8080/ \
   -H "Content-Type: application/json" \
@@ -96,7 +96,7 @@ curl -X POST http://localhost:8080/ \
   }'
 ```
 
-## Next Steps
+### Next Steps
 Engaging with us to ensure that your adapter setup follows best practices for production-ready deployment.
 
 

@@ -1,10 +1,10 @@
 # Chainlink Node External Adapters Template
-This guide provides a clear and structured overview of how to build and customize an External Adapter. Clients are responsible for defining the adapter logic to meet their specific data requirements, while Rational Link will host and manage the server infrastructure to support these extended data needs.
-You might consider using an external adapter if you need customized handling or parsing of API responses before delivering data on-chain or would like to interact with other blockchains, enabling cross-chain interoperability.
+This guide provides a clear and structured overview for clients looking to build and customize a Chainlink External Adapter. The client is responsible for defining the adapter logic to meet specific data requirements, while Rational Link will host and manage the supporting server infrastructure. Clients may choose to implement an external adapter when custom handling or parsing of API responses is needed before delivering data on-chain, or when cross-chain interoperability is required to write data to other blockchains.
 
-This repository demonstrates how the adapter is deployed and continuously executed using Docker or locally. It also outlines how to configure the corresponding Chainlink Node bridge and job, tailored to the client’s account and job specifications. For smart contract integration, the ClientContract.sol file provides a working example of how to consume the adapter’s output on-chain.
+This repository demonstrates how the adapter can be deployed and continuously executed using Docker or a local environment. It also outlines how the client can configure the corresponding Chainlink Node bridge and job, tailored to their account and job specifications. For smart contract integration, the ClientContract.sol file provides a working example of how to consume the adapter’s output on-chain.
 
-If your project requires more advanced customization, we're happy to collaborate and provide tailored development support. These services are offered for a fee, with flexible payment options—cryptocurrency preferred.
+If the client’s project requires more advanced customization, Rational Link offers collaborative development support for a fee, with flexible payment options—cryptocurrency preferred.
+
 
 ## Repository Structure
 ```

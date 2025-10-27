@@ -1,28 +1,28 @@
 # Chainlink Node External Adapters Template
 This guide provides a clear and structured overview of how to build and customize an External Adapter. Clients are responsible for defining the adapter logic to meet their specific data requirements, while Rational Link will host and manage the server infrastructure to support these extended data needs.
 You might consider using an external adapter if you need customized handling or parsing of API responses before delivering data on-chain or would like to interact with other blockchains, enabling cross-chain interoperability.
+
 This repository demonstrates how the adapter is deployed and continuously executed using Docker or locally. It also outlines how to configure the corresponding Chainlink Node bridge and job, tailored to the client’s account and job specifications. For smart contract integration, the ClientContract.sol file provides a working example of how to consume the adapter’s output on-chain.
 
+If your project requires more advanced customization, we're happy to collaborate and provide tailored development support. These services are offered for a fee, with flexible payment options—cryptocurrency preferred.
 
 ## Repository Structure
 ```
-my-api/
+.
 ├── contract/
-│   └── ClientContract.sol  # Client request
+│   └── ClientContract.sol       # Sample smart contract for initiating requests
 ├── docker/
-│   └── Dockerfile          # Docker image
+│   └── Dockerfile               # Docker image configuration for deployment
 ├── job/
-│   └── wiki-ea.toml        # Chainlink Node Job spec
+│   └── wiki-ea.toml             # Chainlink Node job specification
 ├── src/
-│   └── server.ts           # External Adapter server
-├── docker-compose.yml
-├── package-lock.json
-├── package.json
-├── tsconfig.json
-└── README.md
+│   └── server.ts                # External Adapter logic — defined and maintained by the client and host by Rational Link
+├── docker-compose.yml           # Container orchestration setup
+├── package-lock.json            # Dependency lock file
+├── package.json                 # Project metadata and scripts
+├── tsconfig.json                # TypeScript configuration
+└── README.md                    # Documentation and usage instructions
 ```
-
-
 ---
 
 ## Request Structure
@@ -58,12 +58,6 @@ Upon successful execution, the adapter returns a structured JSON response contai
 
 
 ---
-## Running the Adapter
-The adapter runs inside a Docker container on the Chainlink Node operator's infrastructure. This setup ensures the job specs can trigger the adapter reliably during each execution cycle.
-To start the container locally:
 
-```bash
-  docker compose up
-```
 
 ---

@@ -29,13 +29,13 @@ This template demonstrates how to implement and deploy a Chainlink External Adap
 ---
 
 ## Request Structure
-The External Adapter expects a JSON payload with the following format:
+The External Adapter expects a JSON payload with the following format via an example using https://en.wikipedia.org/:
 ```json
 {
   "id": "12345",
   "data": {
-    "number": "42",
-    "infoType": "trivia"
+    "titles": "Machine_learning",
+    "exchars": "100"
   }
 }
 ```
@@ -47,7 +47,7 @@ The adapter returns a structured JSON response:
   "jobRunId": "12345",
   "statusCode": 200,
   "data": {
-    "result": "42 is the answer to life, the universe, and everything." #Woohoo!
+    "result": "Machine learning (ML) is a field of study in artificial intelligence concerned with the development and..." 
   }
 }
 ```

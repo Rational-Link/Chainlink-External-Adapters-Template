@@ -14,7 +14,7 @@ observationSource = """
 
     decode_cbor  [type=cborparse data="$(decode_log.data)"]
     fetch        [type=bridge name="wiki-bridge" requestData="{\\"id\\": $(jobSpec.externalJobID), \\"data\\": { \\"titles\\": $(decode_cbor.titles) , \\"exchars\\": $(decode_cbor.exchars)}}"]
-    parse        [type=jsonparse path="data,result" data="$(fetch)"]
+    parse        [type=jsonparse path="query.pages.*.extract" data="$(fetch)"]
     encode_data  [type=ethabiencode abi="(bytes32 requestId,string extract)" data="{\\"requestId\\": $(decode_log.requestId),\\"extract\\": $(parse) }"]
     encode_tx    [type=ethabiencode
                   abi="fulfillOracleRequest2(bytes32 requestId, uint256 payment, address callbackAddress, bytes4 callbackFunctionId, uint256 expiration, bytes calldata data)"

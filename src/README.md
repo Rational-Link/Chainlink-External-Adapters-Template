@@ -55,17 +55,12 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
 
 ### Tips for Clients
 - Adapt the API Call:
-  Replace the Wikipedia API logic with your own external data source. The structure is already in place for handling requests and returning results.
-- Secure Your Adapter:
-- In production, bind the adapter to the loopback interface (127.0.0.1) so it’s only accessible locally by the Chainlink node.
-- Use TLS/HTTPS for secure communication.
-- Consider adding authentication (e.g., signed JWTs) if your adapter will be exposed beyond localhost.
-- Error Handling:
-  The template includes basic error handling. Expand this to cover retries, timeouts, or more detailed error messages as needed.
-- Scalability:
-  For production, consider containerizing with Docker and managing with docker-compose or Kubernetes.
-- Logging:
-  Debug logs are included. Enhance logging for observability in production environments.
+  Clients can replace the sample Wikipedia API logic with their own external data source. The provided structure is already designed to handle requests and return results seamlessly.
+- Production Environment:
+  Clients should be aware that in the production environment hosted by Rational Link, the adapter is bound to the loopback interface so it is only accessible locally by the Chainlink node. In addition, all communication between the node and the adapter is secured using TLS/HTTPS.
+- Advanced Customization:
+  If clients require more advanced customization—such as enhanced error handling and retries, or API key authentication—Rational Link will collaborate closely to tailor the solution to their needs. Every effort will be made to align with client timelines, and this assistance is provided with minimal onboarding fees.
+
 
 ### Running Locally
 ```bash

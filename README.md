@@ -3,8 +3,7 @@ This guide provides an overview for clients looking to build and customize a Cha
 
 This repository demonstrates how the adapter can be deployed and continuously executed using Docker or a local environment. It also outlines how the client can configure the corresponding Chainlink Node bridge and job, tailored to their account and job specifications. For smart contract integration, the ClientContract.sol file provides a working example of how to consume the adapter’s output on-chain.
 
-If the client’s project requires more advanced customization, Rational Link offers collaborative development support for a fee, with flexible payment options—cryptocurrency preferred.
-
+If a client’s project requires more advanced customization, Rational Link is glad to provide collaborative development support. Rational Link will work closely with the client to tailor the solution to their specific needs, making every effort to align with the client’s timeline while offering this assistance with minimal fees.
 
 ## Repository Structure
 ```

@@ -21,13 +21,12 @@ my-api/
 ├── tsconfig.json
 └── README.md
 ```
----
 
 
 ---
 
 ## Request Structure
-The External Adapter expects a JSON payload with the following format via an example using https://en.wikipedia.org/:
+The External Adapter is designed to receive a JSON payload in the following format. The example below demonstrates a request using Wikipedia as the data source:
 ```json
 {
   "id": "12345",
@@ -37,9 +36,13 @@ The External Adapter expects a JSON payload with the following format via an exa
   }
 }
 ```
+- id: A unique identifier for the job run.
+- titles: The title of the Wikipedia article to query.
+- exchars: The number of characters to extract from the article.
+
 ---
 ## Response Structure
-The adapter returns a structured JSON response:
+Upon successful execution, the adapter returns a structured JSON response containing the requested data:
 ```json
 {
   "jobRunId": "12345",
@@ -49,6 +52,10 @@ The adapter returns a structured JSON response:
   }
 }
 ```
+- jobRunId: Echoes the original job ID for traceability.
+- statusCode: Indicates the success of the request (200 = OK).
+- data.result: Contains the extracted content from the specified Wikipedia article
+
 
 ---
 ## Running the Adapter

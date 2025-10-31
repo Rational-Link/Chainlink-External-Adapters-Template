@@ -92,6 +92,6 @@ curl -X POST http://localhost:8080/ \
 ```
 
 ### Next Steps
-Engaging with us to ensure that your adapter setup follows best practices for production-ready deployment.
+Engage with us to ensure that your adapter setup follows best practices for production-ready deployment.
 
 

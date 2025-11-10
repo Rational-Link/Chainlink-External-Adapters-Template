@@ -3,8 +3,8 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
 
 ### How It Works
 1. Startup
-  - The server runs on the port defined in PORT (default: 8080).
-  - On startup, it listens for incoming HTTP requests.
+    - The server runs on the port defined in PORT (default: 8080).
+    - On startup, it listens for incoming HTTP requests.
 
 2. Health Check
   - GET / returns a simple message confirming the adapter is running.

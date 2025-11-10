@@ -26,8 +26,10 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
 4. External API Call
       - The adapter constructs a request to the Wikipedia API using the provided parameters.
       - It fetches the article extract and returns it in a structured response.
+        
 5. Response Format
       - On success:
+
   ```json
   {
     "jobRunId": "1",
@@ -37,7 +39,8 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
     }
   }
   ```
-    - On error:
+      - On error:
+    
       
   ```json
   {

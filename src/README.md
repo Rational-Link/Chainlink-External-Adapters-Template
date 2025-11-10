@@ -7,10 +7,10 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
     - On startup, it listens for incoming HTTP requests.
 
 2. Health Check
-  - GET / returns a simple message confirming the adapter is running.
+      - GET / returns a simple message confirming the adapter is running.
 
 3. Job Execution
-  - POST / accepts a JSON payload from the Chainlink node in the following format:
+      - POST / accepts a JSON payload from the Chainlink node in the following format:
     ```json
     {
       "id": "1",
@@ -20,14 +20,14 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
       }
     }
     ```
-  - titles: The Wikipedia article title to query.
-  - exchars (optional): Number of characters to return from the article extract.
+      - titles: The Wikipedia article title to query.
+      - exchars (optional): Number of characters to return from the article extract.
 
 4. External API Call
-  - The adapter constructs a request to the Wikipedia API using the provided parameters.
-  - It fetches the article extract and returns it in a structured response.
+      - The adapter constructs a request to the Wikipedia API using the provided parameters.
+      - It fetches the article extract and returns it in a structured response.
 5. Response Format
-  - On success:
+      - On success:
   ```json
   {
     "jobRunId": "1",
@@ -37,7 +37,7 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
     }
   }
   ```
-  - On error:
+      - On error:
   ```json
   {
     "jobRunId": "1",

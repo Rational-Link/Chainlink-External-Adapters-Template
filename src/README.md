@@ -37,7 +37,7 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
     }
   }
   ```
-      - On error:
+    - On error:
       
   ```json
   {

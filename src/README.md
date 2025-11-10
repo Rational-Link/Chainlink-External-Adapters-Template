@@ -38,6 +38,7 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
   }
   ```
       - On error:
+      
   ```json
   {
     "jobRunId": "1",

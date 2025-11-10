@@ -28,9 +28,9 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
       - It fetches the article extract and returns it in a structured response.
         
 5. Response Format
-      - On success:
 
   ```json
+# On success:
   {
     "jobRunId": "1",
     "statusCode": 200,
@@ -38,11 +38,10 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
       "result": "Albert Einstein was a German-born theoretical physicist..."
     }
   }
-  ```
-      - On error:
-    
+  ``` 
       
   ```json
+# On Error:
   {
     "jobRunId": "1",
     "statusCode": 500,

@@ -15,8 +15,8 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
     {
       "id": "1",
       "data": {
-        "titles": "Albert Einstein",
-        "exchars": 200
+        "titles": "Machine_learning",
+        "exchars": 500
       }
     }
     ```

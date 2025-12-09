@@ -35,7 +35,7 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
     "jobRunId": "1",
     "statusCode": 200,
     "data": {
-      "result": "Albert Einstein was a German-born theoretical physicist..."
+      "result": "Machine learning (ML) is a field of study in artificial intelligence concerned with the development and study of statistical algorithms that can learn from data and generalise to unseen data, and thus perform tasks without explicit instructions. Within a subdiscipline in machine learning, advances in the field of deep learning have allowed neural networks, a class of statistical algorithms, to surpass many previous machine learning approaches in performance. ML finds application in many fields.."
     }
   }
   ``` 

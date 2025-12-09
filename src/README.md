@@ -13,7 +13,7 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
       - POST / accepts a JSON payload from the Chainlink node in the following format:
     ```json
     {
-      "id": "1",
+      "id": "12345",
       "data": {
         "titles": "Machine_learning",
         "exchars": 500
@@ -32,7 +32,7 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
   ```json
 # On success:
   {
-    "jobRunId": "1",
+    "jobRunId": "12345",
     "statusCode": 200,
     "data": {
       "result": "Machine learning (ML) is a field of study in artificial intelligence concerned with the development and study of statistical algorithms that can learn from data and generalise to unseen data, and thus perform tasks without explicit instructions. Within a subdiscipline in machine learning, advances in the field of deep learning have allowed neural networks, a class of statistical algorithms, to surpass many previous machine learning approaches in performance. ML finds application in many fields.."
@@ -43,7 +43,7 @@ This script provides a simple External Adapter template for Chainlink nodes, bui
   ```json
 # On Error:
   {
-    "jobRunId": "1",
+    "jobRunId": "12345",
     "statusCode": 500,
     "error": "Error message here"
   }
